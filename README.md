@@ -1,1 +1,1 @@
-# weakly_irreducible_poly
+# weakly-irreducible-polynomial
