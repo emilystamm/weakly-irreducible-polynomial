@@ -68,7 +68,9 @@ examples.set_column(1,13,30.0)
 for k in range(1,12):
    
    p = prime(k)
-   if p > 10: power == 5
+   if p > 4: power = 9
+   if p > 10: power = 6
+   if p > 20: power = 4
 
    # Write p to each rows 
    total.write(0, k, p) 
