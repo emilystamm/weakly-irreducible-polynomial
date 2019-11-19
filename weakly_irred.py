@@ -56,7 +56,7 @@ def is_wi_poly(x, p):
 
 # If a is exact power b return True else return False
 def is_power(a,b): return b ** int(round(math.log(a, b))) == a
-power = 10
+power = 12
 # row, column 
 for e in range(3, power + 1):
    total.write(e, 0, "p^" + str(e)) 
@@ -68,8 +68,8 @@ examples.set_column(1,13,30.0)
 for k in range(1,12):
    
    p = prime(k)
-   if p > 4: power = 9
-   if p > 10: power = 6
+   if p > 4: power = 7
+   if p > 10: power = 5
    if p > 20: power = 4
 
    # Write p to each rows 
