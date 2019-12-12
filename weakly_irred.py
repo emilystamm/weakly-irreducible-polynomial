@@ -5,28 +5,14 @@ from sympy.polys.galoistools import gf_irreducible_p
 from sympy import prime
 import math
 import xlsxwriter
-
-f = "wi-polynomial-results-2.xlsx"
-
-
-
+  
 # Workbook is created 
-#wb = xlsxwriter.Workbook(f)
-
-
-
-# def CopyXLSXOver(wbRd, wb):
-#    sheets = wbRD.sheets()
-#    for sheet in sheets: # write data from old file
-#     newSheet = wb.add_worksheet(sheet.name)
-#     for row in range(sheet.nrows):
-#         for col in range(sheet.ncols):
-#             newSheet.write(row, col, sheet.cell(row, col).value)
+wb = xlsxwriter.Workbook("wi-res-v2.xlsx")
 
 # Worksheets   
-#prop = wb.add_worksheet('Proportions') 
-#total = wb.add_worksheet('Totals') 
-#examples = wb.add_worksheet('Examples') 
+prop = wb.add_worksheet('Proportions') 
+total = wb.add_worksheet('Totals') 
+examples = wb.add_worksheet('Examples') 
 
 # Determines if irreducible
 def is_irreducible(f, p): return gf_irreducible_p(f,p, ZZ)
@@ -52,22 +38,23 @@ def add_jx_tothe_m(arr,j,m):
    cpy[k] = cpy[k] + j
    return cpy
 
-# Only consider monics 
+# Only consider monics - but still include changing largest coeff
 
 # Determine if polynomial x is weakly irreducible of F_p
 def is_wi_poly(x, p):
    # must be irreducible
    if not is_irreducible(x,p): return False
    # for each cofficient (other then the highest degree)
-   for m in range(0, len(x)-1):
+   for m in range(0, len(x)):
       for j in range(1,p):
          z = x.copy()
          y = add_jx_tothe_m(z, j, m)
+         if y[0] % p == 0: y = y[1:]
          print("\t", y)
          # each  x +jx^m must be reducible 
          if is_irreducible(y,p): return False
    return True
-'''
+
 # If a is exact power b return True else return False
 def is_power(a,b): return b ** int(round(math.log(a, b))) == a
 power = 12
@@ -79,12 +66,11 @@ for e in range(3, power + 1):
 examples.set_column(1,13,30.0)
 
 # Iterate through the primes
-for k in range(1,7):
-   
+for k in range(1,6):
    p = prime(k)
-   if p > 4: power = 7
+   if p > 4: power = 6
    if p > 10: power = 5
-   if p > 20: power = 4
+   if p > 20: power = 3
 
    # Write p to each rows 
    total.write(0, k, p) 
@@ -95,8 +81,8 @@ for k in range(1,7):
    ired_count = 0
    wi_count = 0
 
-   n = p**(power + 2)
-   for i in range(1, n + 1):
+   n = p**power
+   for i in range(n + 1):
       # Make polynomial x 
       x = num_to_arr(np.base_repr(i, p))
       x = [1] + x
@@ -119,6 +105,5 @@ for k in range(1,7):
          total.write(e, k, wi_count) 
          prop.write(e, k, 1.0 * wi_count/ired_count)
 
-#wb.close()
-'''
+wb.close()
 
