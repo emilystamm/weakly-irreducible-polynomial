@@ -5,9 +5,23 @@ from sympy.polys.galoistools import gf_irreducible_p
 from sympy import prime
 import math
 import xlsxwriter
-  
+
+f = "wi-polynomial-results-2.xlsx"
+
+
+
 # Workbook is created 
-wb = xlsxwriter.Workbook("wi-polynomial-results.xlsx")
+wb = xlsxwriter.Workbook(f)
+
+
+
+# def CopyXLSXOver(wbRd, wb):
+#    sheets = wbRD.sheets()
+#    for sheet in sheets: # write data from old file
+#     newSheet = wb.add_worksheet(sheet.name)
+#     for row in range(sheet.nrows):
+#         for col in range(sheet.ncols):
+#             newSheet.write(row, col, sheet.cell(row, col).value)
 
 # Worksheets   
 prop = wb.add_worksheet('Proportions') 
@@ -65,7 +79,7 @@ for e in range(3, power + 1):
 examples.set_column(1,13,30.0)
 
 # Iterate through the primes
-for k in range(1,12):
+for k in range(1,7):
    
    p = prime(k)
    if p > 4: power = 7
@@ -81,8 +95,8 @@ for k in range(1,12):
    ired_count = 0
    wi_count = 0
 
-   n = p**power
-   for i in range(n + 1):
+   n = p**(power + 2)
+   for i in range(1, n + 1):
       # Make polynomial x 
       x = num_to_arr(np.base_repr(i, p))
       x = [1] + x
