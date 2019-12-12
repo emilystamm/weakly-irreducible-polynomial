@@ -11,7 +11,7 @@ f = "wi-polynomial-results-2.xlsx"
 
 
 # Workbook is created 
-wb = xlsxwriter.Workbook(f)
+#wb = xlsxwriter.Workbook(f)
 
 
 
@@ -24,9 +24,9 @@ wb = xlsxwriter.Workbook(f)
 #             newSheet.write(row, col, sheet.cell(row, col).value)
 
 # Worksheets   
-prop = wb.add_worksheet('Proportions') 
-total = wb.add_worksheet('Totals') 
-examples = wb.add_worksheet('Examples') 
+#prop = wb.add_worksheet('Proportions') 
+#total = wb.add_worksheet('Totals') 
+#examples = wb.add_worksheet('Examples') 
 
 # Determines if irreducible
 def is_irreducible(f, p): return gf_irreducible_p(f,p, ZZ)
@@ -67,7 +67,7 @@ def is_wi_poly(x, p):
          # each  x +jx^m must be reducible 
          if is_irreducible(y,p): return False
    return True
-
+'''
 # If a is exact power b return True else return False
 def is_power(a,b): return b ** int(round(math.log(a, b))) == a
 power = 12
@@ -119,5 +119,6 @@ for k in range(1,7):
          total.write(e, k, wi_count) 
          prop.write(e, k, 1.0 * wi_count/ired_count)
 
-wb.close()
+#wb.close()
+'''
 

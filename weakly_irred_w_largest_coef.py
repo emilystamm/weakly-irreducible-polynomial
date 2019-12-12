@@ -49,6 +49,7 @@ def is_wi_poly(x, p):
       for j in range(1,p):
          z = x.copy()
          y = add_jx_tothe_m(z, j, m)
+         if y[0] % p == 0: y = y[1:]
          print("\t", y)
          # each  x +jx^m must be reducible 
          if is_irreducible(y,p): return False
@@ -56,7 +57,7 @@ def is_wi_poly(x, p):
 
 # If a is exact power b return True else return False
 def is_power(a,b): return b ** int(round(math.log(a, b))) == a
-power = 15
+power = 5
 # row, column 
 for e in range(3, power + 1):
    total.write(e, 0, "p^" + str(e)) 
@@ -68,9 +69,9 @@ examples.set_column(1,13,30.0)
 for k in range(1,3):
    
    p = prime(k)
-   if p > 4: power = 7
-   if p > 10: power = 4
-   if p > 20: power = 3
+   if p > 4: power = 4
+   if p > 10: power = 3
+   if p > 20: power = 2
 
    # Write p to each rows 
    total.write(0, k, p) 
