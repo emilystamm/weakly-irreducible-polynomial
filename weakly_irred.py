@@ -7,7 +7,7 @@ import math
 import xlsxwriter
   
 # Workbook is created 
-wb = xlsxwriter.Workbook("wi-res-v2.xlsx")
+wb = xlsxwriter.Workbook("wi-res-v5.xlsx")
 
 # Worksheets   
 prop = wb.add_worksheet('Proportions') 
@@ -57,7 +57,7 @@ def is_wi_poly(x, p):
 
 # If a is exact power b return True else return False
 def is_power(a,b): return b ** int(round(math.log(a, b))) == a
-power = 12
+power = 22
 # row, column 
 for e in range(3, power + 1):
    total.write(e, 0, "p^" + str(e)) 
@@ -66,10 +66,10 @@ for e in range(3, power + 1):
 examples.set_column(1,13,30.0)
 
 # Iterate through the primes
-for k in range(1,6):
+for k in range(1,2):
    p = prime(k)
-   if p > 4: power = 6
-   if p > 10: power = 5
+   if p > 4: power = 10
+   if p > 10: power = 6
    if p > 20: power = 3
 
    # Write p to each rows 
